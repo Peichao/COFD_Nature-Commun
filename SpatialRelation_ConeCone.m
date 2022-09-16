@@ -261,8 +261,8 @@ for rp = 1:3
     q24p = sum(cat(1,samMatrixp(:,2), samMatrixp(:,4)));
     q24pd = cat(1,samMatrixp(:,2), samMatrixp(:,4));
 %  Using the Fisher's exact test (fishertest in Matlab)
-    xtable = [q13,q24;q24,q13];
-    [h,p_ft] = fishertest(xtable);
+    % xtable = [q13,q24;q24,q13];
+    % [h,p_ft] = fishertest(xtable);
     
  % Using the K-S test (kstest2 in Matlab)
     qall = cat(2,q13pd,q24pd);

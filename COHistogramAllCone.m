@@ -4,58 +4,24 @@
 
 %% Inputs
 clear
-aniName = 'AF5';
-hemiSph = 'Left';
-area = 'V1'; % 'V1' or 'V2'
-dataFolder = 'D:\AF5\ISI_analysis\3. CO histogram';
-ResultfileName = 'ConeNoncone'; % CO, Liso; Miso, Siso, RG, BY, RB, or other name
+aniName = 'X';
+hemiSph = '';
+area = ''; % 
+dataFolder = '';
+ResultfileName = ''; % CO, Liso; Miso, Siso, RG, BY, RB, or other name
 
-labelFront = 15;
+labelFront = ;
 
-COImage = imread(fullfile(dataFolder,'CO5_no holes.tif'));  % 8bit CO image that there is no holes 
+COImage = imread(fullfile(dataFolder,'*.tif'));  % 8bit CO image that there is no holes 
 % COImage = uint8(mean(imread(fullfile(dataFolder,'xx.png')),3));
 
-%AF5
-areaMask = logical(mean(imread(fullfile(dataFolder, 'V1.png')),3));  % Mask of V1
+%
+areaMask = logical(mean(imread(fullfile(dataFolder, '*.png')),3));  % Mask of V1
 areaCOBleach = logical(ones(size(areaMask)));
-areaMaskbv = logical(mean(imread(fullfile(dataFolder, 'AF5_V1_BV.png')),3));  % Mask of V1
-areaMaskL = logical(mean(imread(fullfile(dataFolder, 'AF5_Left_Liso_V1_FinalMask.tif')),3));  % Mask of L cone response region
-areaMaskM = logical(mean(imread(fullfile(dataFolder, 'AF5_Left_Miso_V1_FinalMask.tif')),3)); % Mask of M cone response region
-areaMaskS = logical(mean(imread(fullfile(dataFolder, 'AF5_Left_Siso_V1_FinalMask.tif')),3)); % Mask of S cone response region
-
-%AF4
-% areaMask = logical(mean(imread(fullfile(dataFolder, 'V1.png')),3));  % Mask of V1
-% areaCOBleach = logical(ones(size(areaMask)));
-% areaMaskbv = logical(mean(imread(fullfile(dataFolder, 'AF4_Left_V1_Mask_15_0.tif')),3));  % Mask of V1
-% areaMaskL = logical(mean(imread(fullfile(dataFolder, 'AF4_Left_Liso_V1_FinalMask.tif')),3));  % Mask of L cone response region
-% areaMaskM = logical(mean(imread(fullfile(dataFolder, 'AF4_Left_Miso_V1_FinalMask.tif')),3)); % Mask of M cone response region
-% areaMaskS = logical(mean(imread(fullfile(dataFolder, 'AF4_Left_Siso_V1_FinalMask.tif')),3)); % Mask of S cone response region
-
-
-
-% %AE9
-% areaCOBleach = logical(mean(imread(fullfile(dataFolder, 'CO_bleach mask.png')),3));  % Mask of V1
-% areaMask = logical(mean(imread(fullfile(dataFolder, 'V1 mask_crop.tif')),3));  % Mask of V1
-% areaMaskbv = logical(mean(imread(fullfile(dataFolder, 'AE9_Left_V1_Mask_30_crop.tif')),3));  % Mask of V1
-% areaMaskL = logical(mean(imread(fullfile(dataFolder, 'AE9_Left_Liso_V1_FinalMask.tif')),3));  % Mask of L cone response region
-% areaMaskM = logical(mean(imread(fullfile(dataFolder, 'AE9_Left_Miso_V1_FinalMask.tif')),3)); % Mask of M cone response region
-% areaMaskS = logical(mean(imread(fullfile(dataFolder, 'AE9_Left_Siso_V1_FinalMask.tif')),3)); % Mask of S cone response region
-
-% %AF3
-% areaMask = logical(mean(imread(fullfile(dataFolder, 'V1 mask.tif')),3));  % Mask of V1
-% areaCOBleach = logical(ones(size(areaMask)));
-% areaMaskbv = logical(mean(imread(fullfile(dataFolder, 'AF3_Left_V1_Mask_30.tif')),3));  % Mask of V1
-% areaMaskL = logical(mean(imread(fullfile(dataFolder, 'AF3_Left_Liso_V1_FinalMask.tif')),3));  % Mask of L cone response region
-% areaMaskM = logical(mean(imread(fullfile(dataFolder, 'AF3_Left_Miso_V1_FinalMask.tif')),3)); % Mask of M cone response region
-% areaMaskS = logical(mean(imread(fullfile(dataFolder, 'AF3_Left_Siso_V1_FinalMask.tif')),3)); % Mask of S cone response region
-
-% %AE8 
-% areaMask = logical(mean(imread(fullfile(dataFolder, 'V1 mask.png')),3));  % Mask of V1
-% areaCOBleach = logical(mean(imread(fullfile(dataFolder, 'COBleach_mask.png')),3));  % Mask of CO bleach
-% areaMaskbv = logical(mean(imread(fullfile(dataFolder, 'AE8_Left_V1_Mask_18.tif')),3));  % Mask of V1
-% areaMaskL = logical(mean(imread(fullfile(dataFolder, 'AE8_Left_Liso_V1_FinalMask.tif')),3));  % Mask of L cone response region
-% areaMaskM = logical(mean(imread(fullfile(dataFolder, 'AE8_Left_Miso_V1_FinalMask.tif')),3)); % Mask of M cone response region
-% areaMaskS = logical(mean(imread(fullfile(dataFolder, 'AE8_Left_Siso_V1_FinalMask.tif')),3)); % Mask of S cone response region
+areaMaskbv = logical(mean(imread(fullfile(dataFolder, '*.png')),3));  % Mask of V1
+areaMaskL = logical(mean(imread(fullfile(dataFolder, '*.tif')),3));  % Mask of L cone response region
+areaMaskM = logical(mean(imread(fullfile(dataFolder, '*.tif')),3)); % Mask of M cone response region
+areaMaskS = logical(mean(imread(fullfile(dataFolder, '*.tif')),3)); % Mask of S cone response region
 
 
 areaMaskCone = logical(areaMaskL + areaMaskM + areaMaskS);
@@ -261,79 +227,6 @@ legend([b(1), b(2)], 'Cone domain region', 'Non-cone domain region','Location', 
 savefig([resultFolder, fileName, 'CO3.fig'])
 saveas(gcf, [resultFolder, fileName, 'CO3.png'])
 saveas(gcf, [resultFolder, fileName, 'CO3.svg'])
-%% Plot
-% 
-% dotSize = 20;
-% dotTransparency = 0.2;
-% labelFront = 10;
-% tickFront = 12;
-% axisThickness = 2;
-% 
-% figure
-% scatter(result.L, result.M, dotSize,'filled', 'MarkerFaceAlpha', dotTransparency)
-% 
-% xlabel('L cone', 'FontSize',labelFront)
-% ylabel('M cone', 'FontSize',labelFront)
-% 
-% xlim([-1.1 1.1])
-% ylim([-1.1 1.1])
-% xticks([-1:0.5:1])
-% yticks([-1:0.5:1])
-% xticklabels({'-1','-0.5','0','0.5','1'})
-% yticklabels({'-1','-0.5','','0.5','1'})
-% ax = gca;
-% set(ax,'linewidth',axisThickness)
-% ax.FontSize = tickFront;
-% ax.XAxisLocation = 'origin';
-% ax.YAxisLocation = 'origin';
-% axis square
-% savefig([resultFolder, fileName, 'LMcone.fig'])
-% 
-% figure
-% scatter(result.L, result.S, dotSize,'filled', 'MarkerFaceAlpha', dotTransparency)
-% 
-% xlabel('L cone', 'FontSize',labelFront)
-% ylabel('S cone', 'FontSize',labelFront)
-% 
-% xlim([-1.1 1.1])
-% ylim([-1.1 1.1])
-% xticks([-1:0.5:1])
-% yticks([-1:0.5:1])
-% xticklabels({'-1','-0.5','0','0.5','1'})
-% yticklabels({'-1','-0.5','','0.5','1'})
-% ax = gca;
-% set(ax,'linewidth',axisThickness)
-% ax.FontSize = tickFront;
-% ax.XAxisLocation = 'origin';
-% ax.YAxisLocation = 'origin';
-% axis square
-% savefig([resultFolder, fileName, 'LScone.fig'])
-% 
-% figure
-% scatter(result.M, result.S, dotSize,'filled', 'MarkerFaceAlpha', dotTransparency)
-% 
-% xlabel('M cone', 'FontSize',labelFront)
-% ylabel('S cone', 'FontSize',labelFront)
-% 
-% xlim([-1.1 1.1])
-% ylim([-1.1 1.1])
-% xticks([-1:0.5:1])
-% yticks([-1:0.5:1])
-% xticklabels({'-1','-0.5','0','0.5','1'})
-% yticklabels({'-1','-0.5','','0.5','1'})
-% ax = gca;
-% set(ax,'linewidth',axisThickness)
-% ax.FontSize = tickFront;
-% ax.XAxisLocation = 'origin';
-% ax.YAxisLocation = 'origin';
-% axis square
-% savefig([resultFolder, fileName, 'MScone.fig'])
-%% Save current script
-Version='4';
-fileNameAndLocation='C:\Users\lyr19\Dropbox\Github\ISI_analysis_NHP\ISI_analysis_Peichao\Matlab_data_process\12_Spatial_pattern';
-% fileNameAndLocation = mfileName('fullpath');   % mfileName('fullpath') does not work in current version!!
-% fileNameAndLocation = which(mfileName);
-newbackup= strcat(resultFolder,strcat('COHistogramAllCone_',Version, '.m'));
-currentfile=strcat(fileNameAndLocation, '\COHistogramAllCone.m');
-copyfile(currentfile,newbackup);
+
+
 
